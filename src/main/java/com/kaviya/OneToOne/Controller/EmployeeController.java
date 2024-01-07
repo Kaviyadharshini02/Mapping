@@ -35,9 +35,9 @@ public class EmployeeController {
     public Employee fetchByName(@PathVariable String name){
         return employee.fetchByName(name);
     }
-    @PutMapping
-    public String update(@RequestBody  Employee employee1){
-        return employee.update(employee1);
+    @PutMapping("/{id}")
+    public String update(@RequestBody  Employee employee1,@PathVariable int id){
+        return employee.update(id,employee1);
     }
     @DeleteMapping("{id}")
     public String delete(@PathVariable int id){

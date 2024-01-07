@@ -40,7 +40,8 @@ public class EmployeeImpl implements Model {
         return s;
     }
     @Override
-    public Employee fetchByName(String name){
+    public Employee fetchByName(String name)
+    {
         return employeeRepo.findByName(name);
     }
 //    @Override
@@ -53,7 +54,14 @@ public class EmployeeImpl implements Model {
         return employeeRepo.findById(id).orElse(null);
     }
     @Override
-    public String update(Employee employee){
+    public String update(int id,Employee employee){
+        Employee employee1=employeeRepo.findById(id).orElseThrow(
+                ()-> new EmployeeNotFoundException("Couldn't find employee with id"+id)
+        );
+        employee1.setId(employee1.getId());
+        employee1.setName(employee1.getName());
+        employee1.setEmployeeDetail(employee1.getEmployeeDetail());
+        employee1.setLocation(employee1.getLocation());
         employeeRepo.save(employee);
         return "The record have been updated";
     }
@@ -63,11 +71,10 @@ public class EmployeeImpl implements Model {
 //    }
     @Override
     public String deleteById(int id){
+        Employee employee=employeeRepo.findById(id).orElseThrow(()
+                -> new EmployeeNotFoundException("Employee not found")
+        );
         employeeRepo.deleteById(id);
-        return "Deleted the record on specified id";
+        return "Deleted successfully";
     }
-//    @Override
-//    public List<Employee> findBySalary(double sal){
-//        return employeeRepo.findBy(findBySalary());
-//    }
 }

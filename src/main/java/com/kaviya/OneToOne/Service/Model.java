@@ -10,7 +10,7 @@ public interface Model {
     String create(Employee employee);
     Employee findById(int id);
    // List<Location> findLocation();
-    String update(Employee employee);
+    String update(int id,Employee employee);
    // String partialUpdate(Employee employee);
     String deleteById(int id);
     Employee fetchByName(String name);
