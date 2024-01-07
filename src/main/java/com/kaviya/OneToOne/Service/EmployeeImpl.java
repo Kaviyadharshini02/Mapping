@@ -35,7 +35,9 @@ public class EmployeeImpl implements Model {
     @Override
     public String countOfLocation(int id)
     {
-        Location location = locoRepo.findById(id).orElse(null);
+        Location location = locoRepo.findById(id).orElseThrow(()
+                -> new EmployeeNotFoundException("No location found")
+        );
         String s = "The number of employees at "+location.getLocation()+" are "+employeeRepo.countByLocationId(id);
         return s;
     }
@@ -51,7 +53,9 @@ public class EmployeeImpl implements Model {
 //    }
     @Override
     public Employee findById(int id){
-        return employeeRepo.findById(id).orElse(null);
+        return employeeRepo.findById(id).orElseThrow(()
+                -> new EmployeeNotFoundException("Employee not found")
+        );
     }
     @Override
     public String update(int id,Employee employee){
